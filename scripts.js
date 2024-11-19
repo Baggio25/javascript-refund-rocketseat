@@ -30,7 +30,22 @@ function formatCurrencyBRL(value) {
   return value;
 }
 
+//Captura o evento de submit do formulário para obter os valores
 form.onsubmit = (event) => {
+
+  //Previne o comportamente de reload do form
   event.preventDefault();
+
+  //Cria um novo objeto com os detalhes da nova despesa
+  const newExpense = {
+    id: new Date().getTime(),
+    expense: expense.value,
+    category_id: category.value,
+    category_name: category.options[category.selectedIndex].text,
+    amount: amount.value,
+    created_at: new Date()
+  }
+
+  console.log(newExpense)
   
 }
