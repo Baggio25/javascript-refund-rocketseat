@@ -127,7 +127,7 @@ function updateTotals() {
       const itemAmount = items[item].querySelector(".expense-amount");
       
       //Remover caracteres não numéricos e substitui a vírgula pelo ponto
-      let value = itemAmount.textContent.replace(/[^\d]/g, "").replace(",", ".");
+      let value = itemAmount.textContent.replace(/[^\d,]/g, "").replace(",", ".");
 
       //Converte o valor para float
       value = parseFloat(value);
@@ -140,7 +140,17 @@ function updateTotals() {
       total += Number(value);
     }
 
-    expensesTotal.textContent = total;
+    const symbolBRL = document.createElement("small");
+    symbolBRL.textContent = "R$";
+
+    //Formata e remove o cifrão que será exibido pela smal com um estilo costumizado
+    total = formatCurrencyBRL(total).toUpperCase().replace("R$", "");
+
+    //Limpa o conteúdo do elemento
+    expensesTotal.innerHTML = "";
+
+    //Adiciona o símbolo da moeda e o valor formatado
+    expensesTotal.append(symbolBRL, total);
 
   } catch (error) {
     console.log(error);
